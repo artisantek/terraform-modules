@@ -1,0 +1,10 @@
+provider "aws" {
+    region = "ap-south-1"
+    access_key = "AKIA4WAGH3GPNR36HO62"
+    secret_key = "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"
+
+}
+module "module-s3" {
+    source = "./create-s3"
+    s3_bucket_name = "suni8583"
+}
