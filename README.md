@@ -1,31 +1,34 @@
-# TERRAFORM MODULES
+# Terraform Modules
 
-A Terraform module is a collection of standard configuration files in a dedicated directory. Terraform modules encapsulate groups of resources dedicated to one task, reducing the amount of code you have to develop for similar infrastructure components.
+This repository contains Terraform modules for setting up AWS resources.
 
-### Root Module:
-Every terraform configuration has at least one module, known as root module. It consists of the resources defined in the .tf files in the main working directory
+## Modules
 
-### Child Module:
-A terraform module can call other modules to include their resources into the configuration. A module that has been called by another module is often referred to as a child module.
+### S3 Bucket
 
-## How To Use Terraform Modules
-To use a Terraform module, create a module block and provide the appropriate variable values
+Module for creating an S3 bucket with optional versioning.
 
-##### Example:
-&nbsp; 
-``` 
-module "<module-name>" {
- source  = "<module-path>"
- version = "<module-version>"
- 
- argument_1                     = var.variable_1
- argument_2                     = var.variable_2
- argument_3                     = var.variable_3
-}
-```
+#### Inputs
+- `bucket_name`: The name of the S3 bucket.
+- `force_destroy`: A boolean to indicate if all objects should be deleted when destroying the bucket.
+- `versioning_status`: The versioning status of the bucket.
 
-#### Sources
-Terraforms modules can be stored either locally or remotely. The `source` argument will change depending on their location.
+#### Outputs
+- `bucket_id`: The ID of the S3 bucket.
+- `bucket_arn`: The ARN of the S3 bucket.
 
-#### Versions
-Versioning enables you to control what module changes should be introduced into your infrastructure.
+### DynamoDB Table
+
+Module for creating a DynamoDB table.
+
+#### Inputs
+- `table_name`: The name of the DynamoDB table.
+- `billing_mode`: The billing mode of the table.
+- `read_capacity`: The number of read capacity units.
+- `write_capacity`: The number of write capacity units.
+- `hash_key`: The attribute to use as the hash key.
+
+#### Outputs
+- `table_id`: The ID of the DynamoDB table.
+- `table_arn`: The ARN of the DynamoDB table.
+
