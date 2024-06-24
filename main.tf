@@ -2,14 +2,15 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-module "aws_s3_bucket" {
-  source = "./s3"
-  bucket = var.bucket
-}
-
-module "aws_dynamodb_table" {
-  source = "./dynamoDB"
+resource "aws_dynamodb_table" "terraform_s3_dynamodb" {
   name = var.name
   billing_mode = var.billing_mode
+  read_capacity = 5
+  write_capacity = 5
   hash_key = var.hash_key
+
+  attribute {
+    name = var.hash_key
+    type = "S"
+  }
 }
